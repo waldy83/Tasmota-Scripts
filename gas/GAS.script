@@ -1,0 +1,29 @@
+>D
+;*****
+; Gaszähler
+;
+; Tested by waldy
+;*****
+; - Haken bei "Skript aktivieren" setzen
+; - Skript auswaehlen
+; - Speichern anklicken
+;*****
+; Faktor
+; 1 imp ≙ 0,01 m³  =>  100
+; 1 imp ≙ 0,1 m³   =>  10
+; 1 imp ≙ 1,0 m³   =>  1
+factor=100
+
+>B
+=>sensor53 r
+;
+;Anfangszählerstand
+=>sensor53 c1 0
+;
+>M 1
+;
+; Setupline
++1,14,c,1,-500,Gas
+1,1-0:1.8.0*255(@%factor%,Gesamtverbrauch,m³,total,18)
+
+
