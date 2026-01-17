@@ -1,7 +1,7 @@
 {
     "smartmeters": [
-	    { "manufacturer": "Gas", "label": "GAS", "filename": "GAS.script" },
-	    { "manufacturer": "Gas", "label": "GAS-Tag-Monat-Jahr", "filename": "GAS-DMY.script" },
-	    { "manufacturer": "Gas", "label": "GAS-Tag-Monat-Jahr+Chart", "filename": "GAS-DMY+Chart.script" }
+	    { "manufacturer": "Gas", "label": "Standard", "filename": "GAS.script" },
+	    { "manufacturer": "Gas", "label": "Historie-Tag-Monat-Jahr", "filename": "GAS-DMY.script" },
+	    { "manufacturer": "Gas", "label": "Historie-Tag-Monat-Jahr+Chart", "filename": "GAS-DMY+Chart.script" }
     ]
 }
