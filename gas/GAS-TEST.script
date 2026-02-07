@@ -1,4 +1,4 @@
-D 80
+>D 40
 factor=100
 res=0
 save=0
@@ -18,16 +18,21 @@ p:mval=0
 p:dval=0
 p:yval=0
 
+; -- BOOT --
 >B
 =>sensor53 r
 smlj=0
 =>sensor53 c1 0
 
+;-- SML --
 >M 1
+; Setupline
 +1,14,c,1,-500,Gas
 1,1-0:1.8.0*255(@%factor%,Gesamtverbrauch,m3,total,2)
 
+; -- JEDE SEKUNDE --
 >S
+
 ; Reset Logik
 if (res==1)
 then
@@ -92,13 +97,18 @@ svars
 endif
 endif
 
+; WEB INTERFACE
 >W
+
+; web button
 bu(save "Gespeichert" "Daten sichern")
 bu(res "Reset läuft..." "VERBRAUCH NULLEN")
----
-Tagesverbrauch: {m} %2(GasTotal-dval)% m3
-Monatsverbrauch: {m} %2(GasTotal-mval)% m3
-Jahresverbrauch: {m} %2(GasTotal-yval)% m3
----
-Datum: {m} %s(2.0day)%.%s(2.0month)%.%s(2.0year)% - %s(2.0hours)%:%s(2.0mins)%:%s(2.0secs)%
-Uptime: {m} %utm%
+
+; Verbrauch
+Tagesverbrauch{m}%2(GasTotal-dval)% m3
+Monatsverbrauch{m}%2(GasTotal-mval)% m3
+Jahresverbrauch{m}%2(GasTotal-yval)% m3
+
+; Zeit
+Datum{m}%s(2.0day)%.%s(2.0month)%.%s(2.0year)% - %s(2.0hours)%:%s(2.0mins)%:%s(2.0secs)%
+Uptime{m}%utm%
