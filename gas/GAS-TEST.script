@@ -101,8 +101,8 @@ endif
 >W
 
 ; web button
-bu(save "Gespeichert" "Daten sichern")
-bu(res "Reset läuft..." "Verbrauch nullen")
+bu(save "Gespeichert" "Daten speichern")
+bu(res "Reset läuft..." "Verbrauch zurücksetzen")
 
 ; Verbrauch
 Tagesverbrauch{m}%2(GasTotal-dval)% m3
