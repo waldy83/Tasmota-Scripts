@@ -1,4 +1,4 @@
-D 40
+>D 40
 factor=100
 res=0
 save=0
@@ -8,22 +8,16 @@ yr=0
 da=1
 GasTotal=0
 utm="00d 00h 00m"
-
-; -- ARRAYS --
 M:p:dcon=0 31
 M:p:mcon=0 12
-
-; -- PERMANENTE VARS --
 p:mval=0
 p:dval=0
 p:yval=0
-
 >B
 =>sensor53 r
 is(0 "Jan|Feb|Mär|Apr|Mai|Jun|Jul|Aug|Sep|Okt|Nov|Dez|")
 smlj=0
 =>sensor53 c1 0
-
 #daysub
 if wm>0 {
 wcs <div id="day" style="text-align:center;width:400px"></div>
@@ -31,22 +25,21 @@ wcs <script language="JavaScript">function drawChart(){
 wcs var cssc={'headerRow':'hRow','rowNumberCell':'hCol','tableCell':'tCell'};
 wcs var data=google.visualization.arrayToDataTable([['Tag','Energie [m3]',{role: 'style'}],
 for tmp 1 dcon[-1] 1
- if (tmp==day) {
-  wcs [%tmp%,%dcon[tmp]%,'red'],
- }
- if (tmp<day) {
-  wcs [%tmp%,%dcon[tmp]%,'green'],
- }
- if (tmp>day) {
-  wcs [%tmp%,%dcon[tmp]%,''],
- }
+if (tmp==day) {
+wcs [%tmp%,%dcon[tmp]%,'red'],
+}
+if (tmp<day) {
+wcs [%tmp%,%dcon[tmp]%,'green'],
+}
+if (tmp>day) {
+wcs [%tmp%,%dcon[tmp]%,''],
+}
 next
 wcs ]);
 wcs var options={chartArea:{left:40,width:'86%%'},legend:'none',title:'Tagesverbräuche (Monat %is[month]%)',vAxis:{format:'# m3'},hAxis:{title:'Tag',ticks:[1,5,10,15,20,25,30]}};
 wcs var chart=new google.visualization.ColumnChart(document.getElementById('day'));
 wcs chart.draw(data,options);}google.charts.setOnLoadCallback(drawChart);</script>
 }
-
 #monthsub
 if wm>0 {
 wcs <div id="month" style="text-align:center;width:400px"></div>
@@ -54,29 +47,26 @@ wcs <script language="JavaScript">function drawChart(){
 wcs var cssc={'headerRow':'hRow','rowNumberCell':'hCol','tableCell':'tCell'};
 wcs var data=google.visualization.arrayToDataTable([['Monat','Verbrauch [m3]',{role: 'style'}],
 for tmp 1 12 1
- if (tmp<month) {
-  wcs ['%is[tmp]%',%mcon[tmp]%,'green'],
- }
- if (tmp==month) {
-  wcs ['%is[tmp]%',%mcon[tmp]%,'red'],
- }
- if (tmp>month) {
-  wcs ['%is[tmp]%',%mcon[tmp]%,'blue'],
- }
+if (tmp<month) {
+wcs ['%is[tmp]%',%mcon[tmp]%,'green'],
+}
+if (tmp==month) {
+wcs ['%is[tmp]%',%mcon[tmp]%,'red'],
+}
+if (tmp>month) {
+wcs ['%is[tmp]%',%mcon[tmp]%,'blue'],
+}
 next
 wcs ]);
 wcs var options={chartArea:{left:40,width:'86%%'},legend:'none',title:'Verbräuche (Jahr %0(year-1)%/%0year%)',vAxis:{format:'# m3'}};
 wcs var chart=new google.visualization.ColumnChart(document.getElementById('month'));
 wcs chart.draw(data,options);}google.charts.setOnLoadCallback(drawChart);</script>
 }
-
 >M 1
 +1,14,c,1,-500,Gas
 1,1-0:1.8.0*255(@%factor%,Gesamtverbrauch,m3,total,2)
 #
-
 >S
-; Reset Logik
 if (res==1)
 then
 res=0
@@ -92,24 +82,20 @@ next
 svars
 print Werte wurden genullt
 endif
-
 if (save==1)
 then
 save=0
 svars
 print Daten gespeichert
 endif
-
 if (sml[1]>0)
 then
 smlj=1
 endif
-
 if (year<2020)
 then
 break
 endif
-
 if (upsecs%60==0)
 then
 hour=hours
@@ -118,7 +104,6 @@ utm=s(2.0(int(uptime/1440)))+"d "+s(2.0(int(uptime/60)%24))+"h "+s(2.0(uptime%60
 GasTotal=sml[1]
 dcon[day]=GasTotal-dval
 mcon[month]=GasTotal-mval
-
 if ((chg[hour]>0) and (hour==0))
 then
 if (day>1)
@@ -135,15 +120,12 @@ then
 yval=GasTotal
 endif
 dval=GasTotal
-svars 
+svars
 endif
 endif
-
 >W
-; Buttons (werden in Tasmota immer oben gerendert)
 bu(save "Gespeichert" "Daten sichern")
 bu(res "Reset läuft..." "Verbrauch nullen")
-
 ---
 Tagesverbrauch: {m} %2(GasTotal-dval)% m3
 Monatsverbrauch: {m} %2(GasTotal-mval)% m3
@@ -151,13 +133,12 @@ Jahresverbrauch: {m} %2(GasTotal-yval)% m3
 ---
 Datum: {m} %s(2.0day)%.%s(2.0month)%.%s(2.0year)% - %s(2.0hours)%:%s(2.0mins)%:%s(2.0secs)%
 Uptime: {m} %utm%
-
 $<div style="margin-left:-20px">
 $<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 $<script type="text/javascript">google.charts.load('current',{packages:['corechart']});</script>
 %=#daysub
 %=#monthsub
 $<center><span style="font-size:10px;">
-$Original by ottelo.jimdo.de - modified by waldy<br>
+$Original by ottelo.jimdo.de - modified by waldy0815<br>
 $Hinweis: Die Daten werden immer um Mitternacht gespeichert!<br>
 $</span></center></div>
