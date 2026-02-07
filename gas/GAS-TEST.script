@@ -1,1 +1,103 @@
+D 40
+factor=100
+; Hilfsvariable für Reset
+res=0
 
+; -- ARRAYS --
+M:p:dcon=0 31
+M:p:mcon=0 12
+
+; -- VARS --
+GasTotal=0
+p:mval=0
+p:dval=0
+p:yval=0
+
+tmp=0
+utm="00d 00h 00m"
+hour=0
+yr=0
+da=1
+save=0
+
+>B
+=>sensor53 r
+smlj=0
+=>sensor53 c1 0
+
+>M 1
++1,14,c,1,-500,Gas
+1,1-0:1.8.0*255(@%factor%,Gesamtverbrauch,m3,total,2)
+
+>S
+; --- RESET LOGIK ---
+if (res==1) {
+  res=0
+  ; Setze Referenzen auf aktuellen Stand
+  dval=GasTotal
+  mval=GasTotal
+  yval=GasTotal
+  ; Lösche Tages-Tabelle
+  for tmp 1 31 1
+    dcon[tmp]=0
+  next
+  ; Lösche Monats-Tabelle
+  for tmp 1 12 1
+    mcon[tmp]=0
+  next
+  print Werte wurden auf 0 gesetzt
+  svars
+}
+
+if (save==1) {
+  save=0
+  svars
+  print Daten wurden gespeichert
+}
+
+if (sml[1]>0) {
+  smlj=1
+}
+
+if (year<2020) {
+  print NTP not ready
+  break
+}
+
+if (upsecs%60==0) {
+  hour=hours
+  yr=year
+  utm=s(2.0(int(uptime/1440)))+"d "+s(2.0(int(uptime/60)%24))+"h "+s(2.0(uptime%60))+"m"
+  GasTotal=sml[1]
+  dcon[day]=GasTotal-dval
+  mcon[month]=GasTotal-mval
+
+  if ((chg[hour]>0) and (hour==0)) {
+    if (day>1) {
+      da=day
+    } else {
+      for tmp (da+1) 31 1
+        dcon[tmp]=0
+      next
+      mval=GasTotal
+    }
+    if (chg[yr]>0) {
+      yval=GasTotal
+    }
+    dval=GasTotal
+    svars 
+  }
+}
+
+>W
+; Buttons für die Bedienung
+bu(save "Gespeichert!" "Daten sichern")
+bu(res "Reset läuft..." "VERBRAUCH NULLEN")
+
+---
+Tagesverbrauch{m}%2(GasTotal-dval)% m3
+Monatsverbrauch{m}%2(GasTotal-mval)% m3
+Jahresverbrauch{m}%2(GasTotal-yval)% m3
+---
+Datum{m}%s(2.0day)%.%s(2.0month)%.%s(2.0year)% - %s(2.0hours)%:%s(2.0mins)%:%s(2.0secs)%
+Uptime{m}%utm%
