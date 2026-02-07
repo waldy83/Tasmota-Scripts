@@ -124,8 +124,9 @@ svars
 endif
 endif
 >W
-bu(save "Gespeichert" "Daten sichern")
-bu(res "Reset läuft..." "Verbrauch nullen")
+; web button
+bu(save "Gespeichert" "Daten speichern")
+bu(res "Reset läuft..." "Verbrauch zurücksetzen")
 
 Tagesverbrauch: {m} %2(GasTotal-dval)% m3
 Monatsverbrauch: {m} %2(GasTotal-mval)% m3
