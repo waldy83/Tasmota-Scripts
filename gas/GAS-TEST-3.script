@@ -1,0 +1,15 @@
+>D
+factor=100
+startwert=12345
+init_done=0
+
+>B
+=>sensor53 r
+if %init_done%==0
+  =>sensor53 c1 %startwert%
+  init_done=1
+endif
+
+>M 1
++1,14,c,1,0,Gas
+1,1-0:1.8.0*255(@%factor%,Gesamtverbrauch,m³,total,2)
