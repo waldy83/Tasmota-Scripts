@@ -126,11 +126,11 @@ endif
 >W
 bu(save "Gespeichert" "Daten sichern")
 bu(res "Reset läuft..." "Verbrauch nullen")
----
+
 Tagesverbrauch: {m} %2(GasTotal-dval)% m3
 Monatsverbrauch: {m} %2(GasTotal-mval)% m3
 Jahresverbrauch: {m} %2(GasTotal-yval)% m3
----
+
 Datum: {m} %s(2.0day)%.%s(2.0month)%.%s(2.0year)% - %s(2.0hours)%:%s(2.0mins)%:%s(2.0secs)%
 Uptime: {m} %utm%
 $<div style="margin-left:-20px">
