@@ -104,7 +104,7 @@ wcs chart.draw(data,options);}google.charts.setOnLoadCallback(drawChart);</scrip
 >M 1
 ; Setupline
 +1,14,c,1,-500,Gas
-1,1-0:1.8.0*255(@%factor%,Gesamtverbrauch,m3,total,18)
+1,1-0:1.8.0*255(@%factor%,Gesamtverbrauch,m3,total,2)
 #
 
 ; -- JEDE SEKUNDE --
@@ -195,3 +195,4 @@ $Hinweis: Die Daten werden immer um Mitternacht gespeichert!<br>
 $Der Restart Button speichert ebenfalls die Daten.<br>
 
 $</span></center></div>
+
