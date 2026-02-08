@@ -1,6 +1,6 @@
 >D 40
 factor=100
-zaehler_start=12345
+zaehler_start=0
 
 res=0
 save=0
