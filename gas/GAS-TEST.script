@@ -1,5 +1,7 @@
 >D 40
 factor=100
+zaehler_start=12345
+
 res=0
 save=0
 tmp=0
@@ -22,7 +24,7 @@ p:yval=0
 >B
 =>sensor53 r
 smlj=0
-=>sensor53 c1 0
+=>sensor53 c1 %zaehler_start%
 
 ;-- SML --
 >M 1
