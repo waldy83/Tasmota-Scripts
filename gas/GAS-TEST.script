@@ -1,4 +1,7 @@
 >D 40
+;*****
+; Gaszähler TEST - DMY
+;*****
 factor=100
 zaehler_start=0
 
