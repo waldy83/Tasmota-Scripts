@@ -1,5 +1,7 @@
 >D 40
 factor=100
+zaehler_start=0
+
 res=0
 save=0
 tmp=0
@@ -17,7 +19,7 @@ p:yval=0
 =>sensor53 r
 is(0 "Jan|Feb|Mär|Apr|Mai|Jun|Jul|Aug|Sep|Okt|Nov|Dez|")
 smlj=0
-=>sensor53 c1 0
+=>sensor53 c1 %zaehler_start%
 #daysub
 if wm>0 {
 wcs <div id="day" style="text-align:center;width:400px"></div>
