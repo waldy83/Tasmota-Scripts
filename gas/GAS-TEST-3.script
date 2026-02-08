@@ -1,14 +1,10 @@
 >D
 factor=100
-startwert=12345
-init_done=0
+zaehler_start=12345
 
 >B
 =>sensor53 r
-if %init_done%==0
-  =>sensor53 c1 %startwert%
-  init_done=1
-endif
+=>sensor53 c1 %zaehler_start%
 
 >M 1
 +1,14,c,1,0,Gas
