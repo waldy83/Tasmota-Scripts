@@ -145,6 +145,6 @@ $<script type="text/javascript">google.charts.load('current',{packages:['corecha
 %=#daysub
 %=#monthsub
 $<center><span style="font-size:10px;">
-$Original by ottelo.jimdo.de - modified by waldy0815<br>
+$Original by ottelo.jimdo.de - modified by waldy<br>
 $Hinweis: Die Daten werden immer um Mitternacht gespeichert!<br>
 $</span></center></div>
