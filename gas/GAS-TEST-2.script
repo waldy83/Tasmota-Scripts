@@ -120,7 +120,7 @@ dcon[tmp]=0
 next
 mval=GasTotal
 endif
-if (chg[yr]>0)
+if (day==1 and month==1)
 then
 yval=GasTotal
 endif
