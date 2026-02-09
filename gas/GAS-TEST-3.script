@@ -1,7 +1,18 @@
 >D
-factor=100
-zaehler_start=12345
+;============================================================
+; GASZÄHLER-SCRIPT
+;============================================================
 
+; --- EINSTELLUNGEN (Hier anpassen) ---
+; Impuls-Faktor:
+; 100 = 0,01 m³/Imp | 10  = 0,1 m³/Imp | 1  = 1,0 m³/Imp
+factor=100
+
+; Startwert des mechanischen Zählers (z.B. 36489.08)
+; Hinweis: Ohne Komma eingeben
+zaehler_start=0
+
+; --- Ab hier nichts ändern ---
 >B
 =>sensor53 r
 =>sensor53 c1 %zaehler_start%
