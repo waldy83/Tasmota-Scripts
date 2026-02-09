@@ -1,10 +1,18 @@
 >D 40
-;*****
-; Gaszähler TEST - DMY
-;*****
+;============================================================
+; GASZÄHLER-SCRIPT (DMY)
+;============================================================
+
+; --- EINSTELLUNGEN (Hier anpassen) ---
+; Impuls-Faktor:
+; 100 = 0,01 m³/Imp | 10  = 0,1 m³/Imp | 1  = 1,0 m³/Imp
 factor=100
+
+; Startwert des mechanischen Zählers (z.B. 36489.08)
+; Hinweis: Ohne Komma eingeben
 zaehler_start=0
 
+; --- INTERNE VARIABLEN (Nicht ändern) ---
 res=0
 save=0
 tmp=0
