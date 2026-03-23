@@ -18,5 +18,5 @@ zaehler_start=0
 =>sensor53 c1 %zaehler_start%
 
 >M 1
-+1,14,c,1,0,Gas
++1,14,c,1,-500,Gas
 1,1-0:1.8.0*255(@%factor%,Gesamtverbrauch,m³,total,2)
