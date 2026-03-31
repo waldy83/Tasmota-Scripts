@@ -1,0 +1,7 @@
+{
+    "smartmeters": [
+	    { "manufacturer": "Gas", "label": "Standard", "filename": "GAS.script" },
+		{ "manufacturer": "Gas", "label": "Historie", "filename": "GAS-Historie.script" },
+	    { "manufacturer": "Gas", "label": "Historie + Chart", "filename": "GAS-Historie+Chart.script" }
+    ]
+}

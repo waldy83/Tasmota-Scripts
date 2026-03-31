@@ -1,0 +1,127 @@
+>D 40
+;===================================================================
+; GASZÄHLER-SCRIPT (Historie)
+;===================================================================
+
+; --- EINSTELLUNGEN (Hier anpassen) ---
+; Impuls-Faktor:
+; 100 = 0,01 m³/Imp | 10  = 0,1 m³/Imp | 1  = 1,0 m³/Imp
+factor=100
+
+; Startwert des mechanischen Zählers (z.B. 36489.08)
+; Hinweis: Ohne Komma eingeben
+zaehler_start=0
+
+; --- INTERNE VARIABLEN (Nicht ändern) ---
+res=0
+save=0
+tmp=0
+hour=0
+yr=0
+da=1
+GasTotal=0
+utm="00d 00h 00m"
+
+; -- ARRAYS --
+M:p:dcon=0 31
+M:p:mcon=0 12
+
+; -- PERMANENTE VARS --
+p:mval=0
+p:dval=0
+p:yval=0
+
+; -- BOOT --
+>B
+=>sensor53 r
+smlj=0
+=>sensor53 c1 %zaehler_start%
+
+;-- SML --
+>M 1
+; Setupline
++1,14,c,1,-500,Gas
+1,1-0:1.8.0*255(@%factor%,Gesamtverbrauch,m3,total,2)
+
+; -- JEDE SEKUNDE --
+>S
+
+; Reset Logik
+if (res==1)
+then
+res=0
+dval=GasTotal
+mval=GasTotal
+yval=GasTotal
+for tmp 1 31 1
+dcon[tmp]=0
+next
+for tmp 1 12 1
+mcon[tmp]=0
+next
+svars
+print Werte wurden genullt
+endif
+
+; Manueller Save
+if (save==1)
+then
+save=0
+svars
+print Daten gespeichert
+endif
+
+if (sml[1]>0)
+then
+smlj=1
+endif
+
+if (year<2020)
+then
+break
+endif
+
+if (upsecs%60==0)
+then
+hour=hours
+yr=year
+utm=s(2.0(int(uptime/1440)))+"d "+s(2.0(int(uptime/60)%24))+"h "+s(2.0(uptime%60))+"m"
+GasTotal=sml[1]
+dcon[day]=GasTotal-dval
+mcon[month]=GasTotal-mval
+
+if ((chg[hour]>0) and (hour==0))
+then
+if (day>1)
+then
+da=day
+else
+for tmp (da+1) 31 1
+dcon[tmp]=0
+next
+mval=GasTotal
+endif
+if (day==1 and month==1)
+then
+yval=GasTotal
+endif
+dval=GasTotal
+svars 
+endif
+endif
+
+; WEB INTERFACE
+>W
+
+; web button
+bu(save "Gespeichert" "Daten speichern")
+bu(res "Reset läuft..." "Verbrauch zurücksetzen")
+
+; Verbrauch
+Tagesverbrauch{m}%2(GasTotal-dval)% m3
+Monatsverbrauch{m}%2(GasTotal-mval)% m3
+Jahresverbrauch{m}%2(GasTotal-yval)% m3
+
+; Zeit
+Datum{m}%s(2.0day)%.%s(2.0month)%.%s(2.0year)% - %s(2.0hours)%:%s(2.0mins)%:%s(2.0secs)%
+Uptime{m}%utm%
