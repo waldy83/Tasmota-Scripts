@@ -41,7 +41,7 @@ smlj=0
 >M 1
 ; Setupline
 +1,14,c,1,-500,Gas
-1,1-0:1.8.0*255(@%factor%,Gesamtverbrauch,m3,total,2)
+1,1-0:1.8.0*255(@%factor%,Gesamtverbrauch,m3,Total,2)
 
 ; -- JEDE SEKUNDE --
 >S
