@@ -19,4 +19,4 @@ zaehler_start=0
 
 >M 1
 +1,14,c,1,-500,Gas
-1,1-0:1.8.0*255(@%factor%,Gesamtverbrauch,m³,Total,2)
+1,1-0:1.8.0*255(@%factor%,Gesamtverbrauch,m³,total,2)
