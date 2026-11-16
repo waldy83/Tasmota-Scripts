@@ -1,6 +1,6 @@
 >D 48
 ;===================================================================
-; GASZÄHLER-SCRIPT (Historie + Charts) -
+; GASZÄHLER-SCRIPT (Historie + Charts) - v1.0.1
 ;===================================================================
 ; Basis-Script: ottelo.jimdo.de  |  Modifiziert: waldy-smarthome.de
 ;===================================================================
@@ -239,12 +239,16 @@ avg_g=0
 
 if ((chg[hour]>0) and (hour==0))
 then
-for tmp 1 48 1 | g30[tmp]=0 | next
+for tmp 1 48 1
+g30[tmp]=0
+next
 if (day>1)
 then
 da=day
 else
-for tmp (da+1) 31 1 | dcon[tmp]=0 | next
+for tmp (da+1) 31 1
+dcon[tmp]=0
+next
 mval=GasTotal
 endif
 if (day==1 and month==1)
